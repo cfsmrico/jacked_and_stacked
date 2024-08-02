@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+enum SampleItem { itemOne, itemTwo, itemThree }
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Jacked and Stacked',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -78,6 +79,39 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.fitness_center),
+              onPressed: () { Scaffold.of(context).openDrawer(); },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          }
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.calendar_month),
+            onPressed: () { },
+            tooltip: MaterialLocalizations.of(context).calendarModeButtonLabel
+          ),
+          PopupMenuButton(
+              icon: const Icon(Icons.menu),
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
+            const PopupMenuItem<SampleItem>(
+              value: SampleItem.itemOne,
+              child: Text('Item 1'),
+            ),
+            const PopupMenuItem<SampleItem>(
+              value: SampleItem.itemTwo,
+              child: Text('Item 2'),
+            ),
+            const PopupMenuItem<SampleItem>(
+              value: SampleItem.itemThree,
+              child: Text('Item 3'),
+            ),          
+            ],
+          )
+        ],
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
@@ -106,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'You have clicked the button this many times:',
             ),
             Text(
               '$_counter',
@@ -121,5 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.power),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void onDateChanged(DateTime value) {
   }
 }
