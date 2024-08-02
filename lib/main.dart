@@ -112,7 +112,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           )
         ],
-        // TRY THIS: Try changing the color here to a specific color (to
+/*         bottom: TabBar(tabs: <Widget>[
+          Tab(
+            icon: Icon(Icons.cloud_outlined),
+          ),
+          Tab(
+            icon: Icon(Icons.beach_access_sharp),
+          ),
+          Tab(
+            icon: Icon(Icons.brightness_5_sharp),
+          ),
+        ]),f
+ */        // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -158,5 +169,56 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onDateChanged(DateTime value) {
+  }
+}
+
+class MyTabbedPage extends StatefulWidget {
+  const MyTabbedPage({ super.key });
+  @override
+  State<MyTabbedPage> createState() => _MyTabbedPageState();
+}
+
+class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
+  static const List<Tab> myTabs = <Tab>[
+    Tab(text: 'LEFT'),
+    Tab(text: 'RIGHT'),
+  ];
+
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: myTabs.length);
+  }
+
+ @override
+ void dispose() {
+   _tabController.dispose();
+   super.dispose();
+ }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: myTabs,
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: myTabs.map((Tab tab) {
+          final String label = tab.text!.toLowerCase();
+          return Center(
+            child: Text(
+              'This is the $label tab',
+              style: const TextStyle(fontSize: 36),
+            ),
+          );
+        }).toList(),
+      ),
+    );
   }
 }
