@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'routes/home/home.dart';
+import 'routes/calendar/calendar.dart';
+import 'routes/add_exercise/add_exercise.dart';
 
 void main() {
   runApp(const MainApp());
@@ -29,6 +31,8 @@ class MainApp extends StatelessWidget {
             ),
           );
         },
+        '/calendar': (context) => const CalendarRoute(title: 'Calendar'),
+        '/addExercise': (context) => const AddExerciseRoute(title: 'Add Exercise'),
       },
       debugShowCheckedModeBanner: false,
       title: 'Jacked and Stacked',
