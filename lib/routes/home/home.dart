@@ -37,6 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () { },
             tooltip: MaterialLocalizations.of(context).calendarModeButtonLabel
           ),
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () { },
+            tooltip: 'Add Exercise'
+          ),
           PopupMenuButton(
               icon: const Icon(Icons.menu),
               itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
